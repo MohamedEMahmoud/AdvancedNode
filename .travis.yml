@@ -1,0 +1,37 @@
+# language use it
+language: node_js
+# version of node_js
+node_js:
+ - "14"
+# dist for distribution that mean operating system want to use
+# this dist is specification of linux operating system
+dist: trusty
+# cloud service you use in project
+services: 
+ - mongodb
+ - redis-server
+env:
+ - Node_ENV=ci 
+ - PORT=3000
+# store node_modules in travis virtual machine travis copy node_modules from github 
+cache:
+  directories:
+      - node_modules
+      - client/node_modules
+# install package
+install:
+# for node js
+ - npm install
+#  for React
+ - npm run bulid
+# execute to server and run tests
+script:
+# nohup stand fro no hang up mean if shell closed don't kill server
+# npm run server to run server 
+# & mean run this command in a subshell (in the background)
+# command mean start server in a subshell (background) and if exit shell don't kill server keep it run
+ - nohup npm run start &
+# wait 3 second it is a little bit of time to start our server
+ - sleep 3
+# to run test
+ - npm run test
