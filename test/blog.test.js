@@ -5,13 +5,14 @@ beforeEach(async () => {
   page = await Page.bulid();
   await page.goto("http://localhost:3000");
 });
-
+// When logged in
 describe("When logged in", async () => {
   beforeEach(async () => {
     await page.login();
     await page.click("a.btn-floating");
   });
-  test("can see blog create form ", async () => {
+// can see blog create form
+  test("can see blog create form", async () => {
     const label = await page.getContentsOf("form label");
     expect(label).toEqual("Blog Title");
   });
